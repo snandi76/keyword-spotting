@@ -16,6 +16,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG")
 # Create the main executable named 'app'
 add_executable(app main.cpp)
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PORTAUDIO REQUIRED portaudio-2.0)
+include_directories(${PORTAUDIO_INCLUDE_DIRS})
+target_link_libraries(app ${PORTAUDIO_LIBRARIES})
+
+
 # Include the keyword-spotting library CMakeLists.txt
 add_subdirectory(keyword-spotting-cpp-mcu-v5)
 
